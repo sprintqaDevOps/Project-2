@@ -29,8 +29,6 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
-                   cd terraform/ec2-creation/
-                   sudo rm -rf .terraform/*
                    sudo terraform init
 
                 '''
@@ -45,5 +43,10 @@ pipeline {
             }
         }
 
+    }
+    post { 
+        always { 
+            cleanWs()
+        }
     }
 }
