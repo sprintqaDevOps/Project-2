@@ -1,0 +1,34 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+
+    stages {
+        stage('Docker Build image') {
+            steps {
+                sh '''
+                  cd spring-petclinic/
+                  echo 'building docker image'
+                  sudo docker build -t demo:v1 .
+                '''
+                }
+            }
+        stage('Docker run') {
+            steps {
+                sh '''
+                  sudo docker run -it -d -p 8096:8080 demo:v1
+
+                '''
+            }
+        }
+    }
+
+    post {
+        always {
+            cleanWs()
+        }
+    }
+}
