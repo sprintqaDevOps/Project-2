@@ -29,6 +29,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
+                   cd terraform/ec2-creation/
                    sudo terraform init
 
                 '''
