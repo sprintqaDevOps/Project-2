@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh '''
                    cd terraform/ec2-creation/
-                   terraform init
+                   sudo terraform init
 
                 '''
             }
@@ -39,7 +39,7 @@ pipeline {
             steps {
                 sh """
                    cd terraform/ec2-creation/
-                   terraform apply -var-file=sample.tfvars -auto-approve
+                   sudo terraform apply -var-file=sample.tfvars -auto-approve
                 """
             }
         }
