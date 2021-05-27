@@ -4,9 +4,7 @@
 
 pipeline {
     agent any
-    tools{
-        maven 'maven-v3.8.1' // get it from global tool
-    }
+    
     //Update AWS credentials as needed
     environment {
         AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
@@ -20,9 +18,9 @@ pipeline {
                 script{
                     echo 'building docker image'
                     withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh 'cd train-schedule/ && docker build -t dzhovid/train-schedule:v3 .'
+                        sh 'cd train-schedule/ && docker build -t mcalik77/train-schedule:v3 .'
                         sh "echo $PASS | docker login -u $USER --password-stdin"
-                        sh 'docker push dzhovid/train-schedule:v3'
+                        sh 'docker push mcalik77/train-schedule:v3'
                     }
                 }
             }
@@ -31,7 +29,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
-                   cd Infrastructure/
+                   cd terraform/
                    terraform init
 
                 '''
@@ -40,8 +38,8 @@ pipeline {
         stage('Terraform Apply (can be parametrized for Prod, Dev, and QA)') {
             steps {
                 sh """
-                   cd Infrastructure/
-                   terraform apply -auto-approve
+                   cd terraform/
+                   terraform apply -var-file=sample.tfvars -auto-approve
                 """
             }
         }
