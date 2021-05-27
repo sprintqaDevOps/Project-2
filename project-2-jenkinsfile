@@ -29,7 +29,7 @@ pipeline {
         stage('Terraform Init') {
             steps {
                 sh '''
-                   cd terraform/
+                   cd terraform/ec2-creation/
                    terraform init
 
                 '''
@@ -38,7 +38,7 @@ pipeline {
         stage('Terraform Apply (can be parametrized for Prod, Dev, and QA)') {
             steps {
                 sh """
-                   cd terraform/
+                   cd terraform/ec2-creation/
                    terraform apply -var-file=sample.tfvars -auto-approve
                 """
             }
