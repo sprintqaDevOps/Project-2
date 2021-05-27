@@ -1,0 +1,6 @@
+ssh_key_path = "~/.ssh/id_rsa.pub"
+key_name = "developer-key"
+ami = "ami-0d5eff06f840b45e9"
+instance_type = "t2.micro"
+security_group_name = "allow-ssh-http"
+region = "us-east-1"
