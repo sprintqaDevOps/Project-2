@@ -12,3 +12,4 @@ variable "https-port" {}
 variable "jenkins-port" {}
 variable "cidr_blocks" {}
 variable "user_data" {}
+variable "prefix" {}

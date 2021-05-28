@@ -18,5 +18,6 @@ variable "http-port" {}
 variable "https-port" {}
 variable "jenkins-port" {}
 variable "cidr_blocks" {}
-
+variable "prefix" {
+}
 
