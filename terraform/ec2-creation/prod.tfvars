@@ -21,3 +21,4 @@ http-port = "80"
 https-port = "443"
 jenkins-port = "8095"
 cidr_blocks = ["0.0.0.0/0"]
+prefix = "PROD"

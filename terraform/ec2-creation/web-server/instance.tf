@@ -10,7 +10,7 @@ resource "aws_instance" "dev" {
   user_data = var.user_data
 
   tags = {
-    Name = "DEV_server"
+    Name = "${var.prefix}_server"
   }
 }
 
