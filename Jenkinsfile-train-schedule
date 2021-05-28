@@ -1,0 +1,54 @@
+//Update the Git Hub repo folder. It should have the following items:
+//train-schedule folder with Dockerfile in it
+//terraform folder with all needed files to spin up EC2 instance(s)
+
+pipeline {
+    agent any
+    parameters{
+        string(name: "DockerHubUser", defaultValue: "", description: "Please type your Docker Hub username. It will be used to tag the built image.")
+        string(name: "ImageName", defaultValue: "", description: "Please type a name for the image you want to build and push to your repo.")
+        string(name: "Version", defaultValue: "", description: "Please type the version you want to build and push to your repo. Ex: 'v1'")
+        choice(name: "Environment", choices: ['Prod','Dev','QA'], description: "Please select the environment you want to spin up an instance for.")
+    }
+    //Update AWS credentials as needed
+    environment {
+        AWS_ACCESS_KEY_ID     = credentials('jenkins-aws-secret-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('jenkins-aws-secret-access-key')
+    }
+    
+    //Update DockerHub credentials as needed
+    stages {
+        stage('Build image') {
+            steps {
+                script{
+                    echo 'building docker image'
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                        sh "cd train-schedule/ && docker build -t ${params.DockerHubUser}/${params.ImageName}:${params.Version} ."
+                        sh "echo $PASS | docker login -u $USER --password-stdin"
+                        sh "docker push ${params.DockerHubUser}/${params.ImageName}:${params.Version}"
+                    }
+                }
+            }
+        }
+        //Update terraform folder name and the command as needed.
+        stage('Terraform Init') {
+            steps {
+                sh '''
+                   cd terraform/ec2-creation/
+                   terraform init
+
+                '''
+            }
+        }
+        //make sure the tfvars file exists in terraform folder.
+        stage('Terraform Apply') {
+            steps {
+                sh """
+                   cd terraform/ec2-creation/
+                   terraform apply -var-file=${params.Environment}.tfvars -auto-approve
+                """
+            }
+        }
+
+    }
+}
