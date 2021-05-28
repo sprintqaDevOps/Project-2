@@ -26,7 +26,7 @@ module "myapp-webserver" {
     instance_type       = var.instance_type
     #subnet_id           = module.myapp-vpc.subnet.id
     vpc_id              = aws_default_vpc.my_vpc.id
-    #prefix              = var.prefix
+    prefix              = var.prefix
     security_group_name = var.security_group_name
     http-port = var.http-port
     https-port = var.https-port
