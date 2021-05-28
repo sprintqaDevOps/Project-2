@@ -1,4 +1,4 @@
-ssh_key_path = "~/.ssh/id_rsa.pub"
+ssh_key_path = "/home/ec2-user/.ssh/id_rsa.pub"
 key_name = "developer-key"
 ami = "ami-0d5eff06f840b45e9"
 instance_type = "t2.micro"
