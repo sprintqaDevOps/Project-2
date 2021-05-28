@@ -13,12 +13,12 @@ user_data = <<-EOF
     sudo usermod -a -G docker ec2-user
     sudo curl -L https://github.com/docker/compose/releases/download/1.25.4/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
     sudo chmod +x /usr/local/bin/docker-compose
-    sudo docker run -d -p 8095:80 dzhovid/train-schedule:v3
+    sudo docker run -d -p 8095:8080 dzhovid/train-schedule:v3
   EOF
 
 ssh-port = "22"
 http-port = "80"
-https-port = "443"
+https-port = "674"
 jenkins-port = "8095"
 cidr_blocks = ["0.0.0.0/0"]
 prefix = "Dev"
