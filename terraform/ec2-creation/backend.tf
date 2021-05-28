@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
-    bucket = "terraform-state-file-asel"
-    key    = "tfstate/sample-module10.tfstate"
-    region = "us-east-1"
+    bucket  = "teamhulk-tfstate-backend-bucket"
+    key     = "tfstate/backend1.tfstate"
+    region  = "us-east-1"
   }
 }
