@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket  = "teamhulk-tfstate-backend-bucket"
-    key     = "tfstate/ec2-new.tfstate"
+    key     = "tfstate/backend.tfstate"
     region  = "us-east-1"
   }
 }

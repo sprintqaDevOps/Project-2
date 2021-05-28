@@ -28,6 +28,13 @@ module "myapp-webserver" {
     vpc_id              = aws_default_vpc.my_vpc.id
     #prefix              = var.prefix
     security_group_name = var.security_group_name
+    http-port = var.http-port
+    https-port = var.https-port
+    jenkins-port = var.jenkins-port
+    ssh-port = var.ssh-port 
+
+    user_data = var.user_data 
+    cidr_blocks = var.cidr_blocks
 
     # depends_on = [
     #   module.myapp-vpc

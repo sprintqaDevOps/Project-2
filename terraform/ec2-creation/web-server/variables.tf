@@ -6,3 +6,9 @@ variable "instance_type" {}
 variable "vpc_id" {}
 #variable "prefix" {}
 variable "security_group_name" {}
+variable "ssh-port" {}
+variable "http-port" {}
+variable "https-port" {}
+variable "jenkins-port" {}
+variable "cidr_blocks" {}
+variable "user_data" {}
