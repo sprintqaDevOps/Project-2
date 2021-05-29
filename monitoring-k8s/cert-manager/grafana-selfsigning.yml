@@ -1,0 +1,22 @@
+apiVersion: cert-manager.io/v1alpha2
+kind: Issuer
+metadata:
+  name: selfsigning-issuer
+  namespace: grafana
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: grafana-tls
+  namespace: grafana
+spec:
+  secretName: grafana-tls
+  isCA: true
+  issuerRef:
+    name: selfsigning-issuer
+    kind: Issuer
+  commonName: grafana.devopstechskills.com
+  dnsNames:
+    - grafana.devopstechskills.com

@@ -1,0 +1,11 @@
+global:
+  podSecurityPolicy:
+    enabled: true
+    useAppArmor: false
+serviceAccount:
+  create: true
+  name: cert-manager
+resources:
+  limits:
+    cpu: 15m
+    memory: 100Mi

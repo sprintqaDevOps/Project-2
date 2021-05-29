@@ -1,0 +1,33 @@
+podSecurityPolicy:
+  enabled: true
+persistentVolume:
+  enabled: false
+alertmanager:
+  resources: 
+    limits:
+      cpu: 10m
+      memory: 32Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+# server:
+#   persistentVolume:
+  
+  # resources: 
+  #   limits:
+  #     cpu: 500m
+  #     memory: 512Mi
+  #   requests:
+  #     cpu: 500m
+  #     memory: 512Mi
+
+pushgateway:
+  resources: 
+    limits:
+      cpu: 10m
+      memory: 32Mi
+    requests:
+      cpu: 10m
+      memory: 32Mi
+
+

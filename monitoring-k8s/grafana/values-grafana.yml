@@ -1,0 +1,28 @@
+rbac:
+  pspUseAppArmor: false
+  namespaced: true
+serviceAccount:
+  create: true
+  name: grafana
+replicas: 1
+ingress:
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: grafana
+  hosts:
+    - grafana.devopstechskills.com
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.devopstechskills.com
+resources:
+  limits:
+    cpu: 1000m
+    memory: 256Mi
+  requests:
+    cpu: 500m
+    memory: 128Mi
+persistence:
+  enabled: false
+  # storageClassName: 'default'
+namespaceOverride: "grafana"

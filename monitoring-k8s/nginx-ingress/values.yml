@@ -1,0 +1,23 @@
+rbac:
+  create: true
+controller:
+  ingressClass: grafana 
+  service:
+    externalTrafficPolicy: Local
+  scope:
+    enabled: true
+    namespace: grafana
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+defaultBackend:
+  resources:
+    limits:
+      cpu: 10m
+      memory: 20Mi
+podSecurityPolicy:
+  enabled: true
+serviceAccount:
+  create: true
+  name: nginx-ingress
